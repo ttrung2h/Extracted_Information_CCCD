@@ -22,7 +22,7 @@ class CardAlignment:
         self.img_dst_shape = self.keypoints_descriptors_dst['shape']
     
 
-    def warp_perspective_image(self,processing_img):
+    def warp_perspective_image(self,processing_img,check = False):
         # Sử dụng SIFT để tìm key points và descriptors cho ảnh gốc và ảnh mục tiêu
         sift = cv2.SIFT_create()
         
@@ -54,12 +54,12 @@ class CardAlignment:
             if m.distance < 0.75 * n.distance:
                 good_matches.append(m)
 
-        
-        #Percent of good matches to all matches
-        print("Number of matches: ",len(matches))
-        print("Number of good matches: ",len(good_matches))
-        percent = len(good_matches)/len(matches)
-        print(f"Percent of good matches: {percent}")
+        if check == True:
+            #Percent of good matches to all matches
+            print("Number of matches: ",len(matches))
+            print("Number of good matches: ",len(good_matches))
+            percent = len(good_matches)/len(matches)
+            print(f"Percent of good matches: {percent}")
         
         # Check if there are enough good matches
         if len(good_matches) > 10:
@@ -70,7 +70,7 @@ class CardAlignment:
 
             # Xoay ảnh sau khi tiền xử lí theo ma trận homography
             img_src_rotated = cv2.warpPerspective(processing_img, H, (self.img_dst_shape[1], self.img_dst_shape[0]))
-            return img_src_rotated,percent
+            return img_src_rotated
         
         else:
             print("Not enough key points")
@@ -81,7 +81,7 @@ class CardAlignment:
         Scan image and return image after preprocessing
         """
         #wrap image
-        img_src_rotated,percent = self.warp_perspective_image(self.image)
+        img_src_rotated = self.warp_perspective_image(self.image)
         self.img_src_rotated = img_src_rotated
        
         #preprocessing
@@ -92,7 +92,7 @@ class CardAlignment:
         
         #resize image
         self.processed_image =  blur_image       
-        return self.processed_image,percent
+        return self.processed_image
     
     def visualization(self):
         """

@@ -107,3 +107,4 @@ for file in true_labels_file:
 
 result.sort_values(by=["img_file"],ascending=True,inplace=True)
 result.to_csv("result_mAp.csv",index=False)
+
