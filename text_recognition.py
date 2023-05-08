@@ -25,7 +25,6 @@ class TextRecognition:
     def format_id(self,string):
         return self.remove_not_digit(string)
     
-    
     def predict(self):
         self.result = {}
         self.prob = {}

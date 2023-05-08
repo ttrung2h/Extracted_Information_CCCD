@@ -26,7 +26,7 @@ def get_result(img_path):
     ## text detection
     start_detection = time()
     text_detection = TextDetection(img_processed)
-    infor_dict = text_detection.detect(show_process=False,extract_infor_img=False,display=False)
+    infor_dict = text_detection.detect(show_process=True,extract_infor_img=True,display=True)
     end_detection = time()
     # print("Time to run detection text: ",end_detection - start_detection)
    
@@ -73,7 +73,7 @@ def test_auto(img_folder = "Test/Images/",label_folder = "Test/Labels/"):
 
 
 if __name__ == '__main__':
-    # result,prob = get_result("Test/Images/image37.jpg")
-    # show_result(result)
-    test_auto()
+    result,prob = get_result("Test/Images/image43.jpg")
+    show_result(result)
+    # test_auto()
     
