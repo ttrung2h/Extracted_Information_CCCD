@@ -9,7 +9,7 @@ class TextDetection:
     and get position name, id, dob from card id 
     """
     def __init__(self,image):
-        self.default_config = {"Id":[(1010,650),(2020,820)],"Name": [(650,870),(2350,1000)],"DOB": [(1450,980),(1950,1100)]}
+        self.default_config = {"Id":[(1000,620),(2050,820)],"Name": [(650,860),(2350,1000)],"DOB": [(1450,980),(1950,1100)]}
         self.processed_image = image
 
     def show_gray_image(self,img,name = None):
